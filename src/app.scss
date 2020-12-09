@@ -1,0 +1,13 @@
+@import './custom-theme.scss';
+// @import '~taro-ui/dist/style/index.scss';
+// 按需引入样式，减少打包大小
+
+@import '~taro-ui/dist/style/components/button.scss';
+@import '~taro-ui/dist/style/components/fab.scss';
+@import '~taro-ui/dist/style/components/icon.scss';
+@import '~taro-ui/dist/style/components/float-layout.scss';
+@import '~taro-ui/dist/style/components/textarea.scss';
+@import '~taro-ui/dist/style/components/message.scss';
+@import '~taro-ui/dist/style/components/avatar.scss';
+@import '~taro-ui/dist/style/components/image-picker.scss';
+@import '~taro-ui/dist/style/components/icon.scss';
