@@ -4,6 +4,7 @@ module.exports = {
   },
   defineConstants: {
   },
+  framework: 'react',
   mini: {},
   h5: {
     /**

@@ -1,7 +1,8 @@
 export default {
   pages: [
-    'pages/index/index',
+    'pages/home/index',
     'pages/mine/mine', 
+    'pages/index/index',
     'pages/post/post'
   ],
   window: {
@@ -13,7 +14,7 @@ export default {
   tabBar: {
     list: [
       {
-        pagePath: 'pages/index/index',
+        pagePath: 'pages/home/index',
         text: '首页',
         iconPath: './images/home.png',
         selectedIconPath: './images/homeSelected.png',

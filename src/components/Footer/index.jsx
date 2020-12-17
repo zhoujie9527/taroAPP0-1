@@ -46,7 +46,7 @@ export default function Footer(props) {
         <Logout loading={props.isLogout} handleLogout={props.handleLogout} />
       )}
       <View className="tuture-motto">
-        {props.isLogged ? 'taro从0到1' : '您还未登录'}
+        {props.isLogged ? '欢迎您' : '您还未登录'}
       </View>
       <AtFloatLayout
         isOpened={props.isOpened}

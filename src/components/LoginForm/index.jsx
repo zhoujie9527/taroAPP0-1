@@ -4,9 +4,16 @@ import { View, Form, Input } from '@tarojs/components'
 import { AtButton, AtImagePicker } from 'taro-ui'
 
 import './index.scss'
+import { useEffect } from 'react'
 
 export default function LoginForm(props) {
   const [showAddBtn, setShowAddBtn] = useState(true)
+
+  useEffect(()=> {
+      if(props.files.length === 0) {
+        setShowAddBtn(true)
+      }
+  },[props.files]);
 
   function onChange(files) {
     if (files.length > 0) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AtButton } from 'taro-ui'
 
-export default function LoginButton(props) {
+export default function LoginOut(props) {
   return (
     <AtButton
       type="secondary"
