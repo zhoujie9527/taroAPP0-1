@@ -9,3 +9,5 @@ export const hostM = HOST_M
 export const CDN = 'https://yanxuan.nosdn.127.net'
 
 export const HomeApi = `${host}/xhr/index/index.json`
+
+export const HomeScrollApi = `${host}/xhr/rcmd/index.json`

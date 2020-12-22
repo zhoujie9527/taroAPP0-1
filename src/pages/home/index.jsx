@@ -1,29 +1,56 @@
-import { View, Text, Image } from '@tarojs/components';
+import { View, Text, Image, ScrollView } from '@tarojs/components';
 import React, { useEffect, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { Swiper, SwiperItem } from '@tarojs/components'
-import { AtSearchBar } from 'taro-ui';
-import { HomeApi } from '@utils/api'
+import { AtMessage, AtSearchBar } from 'taro-ui';
+import { HomeApi, HomeScrollApi } from '@utils/api'
+import { getWindowHeight } from '@utils/style'
+import fetch from '@utils/request'
 import './index.scss'
+
+const SCROLL_SIZE = 20
 
 const Home = () => {
     const [searchCount, setSearchCount] = useState(2000);
+    const [homeData, setHomeData] = useState([]);
     const [scrollData, setScrollData] = useState([]);
+    const [lastItem, setLastItem] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
     useEffect(()=> {
-        Taro.request({
-            url: HomeApi,
-            method: 'GET'
-        }).then((res)=> {
+        fetch({ url: HomeApi, method: 'GET' }).then((res)=> {
             console.log('res', res)
-            setScrollData(res.data.data)
+            setHomeData(res)
         }).catch(err=> {
             console.log('err', err)
         })
+
+        getHomeScroll();
     },[]);
+
+    async function getHomeScroll() {
+        let url = HomeScrollApi + '?' + `size=${SCROLL_SIZE}` + '&' + `lastItemId=${lastItem}`;
+        console.log('url',url)
+        fetch({ url: url, method: 'GET' }).then((res)=> {
+            let list = scrollData.concat(res?.rcmdItemList)
+            setScrollData(list);
+            setLastItem(res?.rcmdItemList[res.rcmdItemList.length - 1]?.id)
+            setHasMore(res?.hasMore)
+        }).catch(err=> {
+            console.log('err', err)
+        })
+    }
+
+    function showDetail(params) {
+        Taro.atMessage({
+            message: '功能开发中...',
+            type: 'info',
+          })
+    }
     
     return(
         <View  className='home'>
+            <AtMessage />
             <View className='home_search'>
                 <AtSearchBar placeholder={`搜索商品，共${searchCount}款产品`} clear />
             </View>
@@ -38,16 +65,44 @@ const Home = () => {
                     autoplay
                 >
                     {
-                        scrollData?.hotStyleList?.hotStyleItemList.map(item=> {
+                        homeData?.focus?.map(item=> {
                             return <SwiperItem>
                             <View className='home_scroll_swiper-img'>
-                                <Image src={item.picUrl} alt="" />
+                                <Image src={item.img} alt="" />
                             </View>
                             </SwiperItem>
                         })
                     }
                 </Swiper>
             </View>
+            <View className='home_scrollTitle'>热门推荐</View>
+            <ScrollView
+                scrollY
+                className='home_scrollY'
+                onScrollToLower={()=>getHomeScroll()}
+                style={{ height: getWindowHeight() }}
+            >
+                <View  className='home_scrollView'>
+                <View className='at-row at-row--wrap'>
+                {
+                    scrollData?.filter(item => item?.type === 1).map((data, index) => {
+                        return <View className='at-col at-col-6' onClick={()=>showDetail(data)}>
+                        <Image className='home_scrollView-img' src={data?.categoryItem?.listPicUrl} alt='--' />
+                        <View className='home_scrollView-price'>
+                            <Text>￥{data?.categoryItem?.retailPrice}</Text>
+                        </View>
+                        </View>
+                    })
+                }
+                
+                </View>
+                </View>
+            </ScrollView>
+            {!hasMore &&
+            <View className='home_nomore'>
+              <Text>更多内容，敬请期待</Text>
+            </View>
+            }
         </View>
     )
 }
