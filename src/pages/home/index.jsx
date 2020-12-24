@@ -42,9 +42,13 @@ const Home = () => {
     }
 
     function showDetail(params) {
-        Taro.atMessage({
-            message: '功能开发中...',
-            type: 'info',
+        console.log('showDetail', params)
+        // Taro.atMessage({
+        //     message: '功能开发中...',
+        //     type: 'info',
+        //   })
+        Taro.navigateTo({
+            url: `/pages/post/post?data=${JSON.stringify(params)}`,
           })
     }
     
@@ -68,7 +72,7 @@ const Home = () => {
                         homeData?.focus?.map(item=> {
                             return <SwiperItem>
                             <View className='home_scroll_swiper-img'>
-                                <Image src={item.img} alt="" />
+                                <Image style={{height: '100%'}} src={item.img} alt="" />
                             </View>
                             </SwiperItem>
                         })

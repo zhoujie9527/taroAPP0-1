@@ -22,7 +22,7 @@ export default function LoggedMine(props) {
         onClick={onImageClick}
       />
       <View className="mine-nickName">
-        {userInfo.nickName ? userInfo.nickName : 'xxoo'}
+        {userInfo.nickName ? userInfo.nickName : '未登录'}
       </View>
       <View className="mine-username">{userInfo.username}</View>
     </View>
