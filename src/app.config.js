@@ -3,6 +3,7 @@ export default {
     'pages/home/index',
     'pages/mine/mine', 
     'pages/index/index',
+    'pages/parts/index',
     'pages/post/post'
   ],
   window: {
@@ -18,6 +19,12 @@ export default {
         text: '首页',
         iconPath: './images/home.png',
         selectedIconPath: './images/homeSelected.png',
+      },
+      {
+        pagePath: 'pages/parts/index',
+        text: '分类',
+        iconPath: './images/parts.png',
+        selectedIconPath: './images/partsSelected.png',
       },
       {
         pagePath: 'pages/mine/mine',

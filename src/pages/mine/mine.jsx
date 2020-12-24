@@ -98,7 +98,3 @@ export default function Mine() {
     </View>
   )
 }
-
-Mine.config = {
-  navigationBarTitleText: '我的',
-}
