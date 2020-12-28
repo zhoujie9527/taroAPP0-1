@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { View } from '@tarojs/components'
+import { Image, View } from '@tarojs/components'
+import { GoodsFooter } from '@components'
+import { getWindowHeight } from '@utils/style'
 import './index.scss'
 
 export default function GoodsDetail(props) {
@@ -7,13 +9,16 @@ export default function GoodsDetail(props) {
 
   useEffect(()=>{
     setData(JSON.parse(props.data));
-    console.log('props',JSON.parse(props.data))
   },[])
 
   return (
-    <View className="postcard">
-      <View className="post-title">商品描述：{data?.categoryItem?.name || ''}</View>
-      <View className="post-content">商品ID：{data?.id || ''}</View>
+    <View className="goods" style={{ height: getWindowHeight() }}>
+      <Image className="goods-pic" src={data?.categoryItem?.scenePicUrl || ''} />
+      <View className="goods-title">{data?.categoryItem?.name || ''}</View>
+      <View className="goods-price">￥{data?.categoryItem?.retailPrice || ''}</View>
+      <View className="goods-footer">
+      <GoodsFooter data={data} />
+      </View>
     </View>
   )
 }

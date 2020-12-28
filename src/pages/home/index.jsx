@@ -51,6 +51,13 @@ const Home = () => {
             url: `/pages/post/post?data=${JSON.stringify(params)}`,
           })
     }
+
+    function swiperClick(params) {
+           Taro.atMessage({
+            message: '功能开发中...',
+            type: 'info',
+          })
+    }
     
     return(
         <View  className='home'>
@@ -71,7 +78,7 @@ const Home = () => {
                     {
                         homeData?.focus?.map(item=> {
                             return <SwiperItem>
-                            <View className='home_scroll_swiper-img'>
+                            <View className='home_scroll_swiper-img' onClick={()=> swiperClick(item)}>
                                 <Image style={{height: '100%'}} src={item.img} alt="" />
                             </View>
                             </SwiperItem>

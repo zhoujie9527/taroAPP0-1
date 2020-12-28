@@ -41,6 +41,7 @@ export default function Parts() {
         scroll
         tabDirection='vertical'
         tabList={menuList}
+        animated={false}
         onClick={(e)=>handleClick(e)}>
             {
                 menuList?.map((item,index) => {
