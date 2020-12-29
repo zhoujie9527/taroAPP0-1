@@ -17,3 +17,6 @@ onSubmit 事件获得的 event 中的 event.detail.value 始终为空对象，
 useRouter不能直接传对象、数组
 较大的数据建议只传个ID之类的索引值跳转到新页面再通过接口获取数据
 直传需要进行JSON序列化
+
+4. 
+mobx-react还不能直接与react hooks使用，暂时使用传统的class组件实现mobx状态管理 

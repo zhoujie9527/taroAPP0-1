@@ -42,6 +42,8 @@
     "@tarojs/taro": "3.0.18",
     "axios": "^0.21.0",
     "react": "^16.10.0",
+    "mobx": "^4.8.0",
+    "mobx-react": "^6.1.4",
     "react-dom": "^16.10.0",
     "taro-ui": "^3.0.0-alpha.3"
   },

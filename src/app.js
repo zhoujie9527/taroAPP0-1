@@ -1,8 +1,15 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
+import { Provider } from 'mobx-react'
+
+import { appStore } from './utils/store/index'
+
 import './app.scss'
 
-class App extends Component {
+const store = {
+  appStore
+}
 
+class App extends Component {
   componentDidMount () {}
 
   componentDidShow () {}
@@ -11,9 +18,13 @@ class App extends Component {
 
   componentDidCatchError () {}
 
-  // this.props.children 是将要会渲染的页面
+  // this.props.children 就是要渲染的页面
   render () {
-    return this.props.children
+    return (
+      <Provider store={store}>
+        {this.props.children}
+      </Provider>
+    )
   }
 }
 
