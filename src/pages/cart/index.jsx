@@ -1,39 +1,19 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { View, Button, Text, Image } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 import { AtButton } from 'taro-ui'
-
 import './index.scss'
 
+function Cart(props) {
+    const [islogin, setIslogin] = useState(false);
 
-@inject('store')
-@observer
-class Cart extends Component {
-  state = {
-    islogin: false
-  }
-
-  componentWillMount () { }
-
-  componentDidMount () { 
-  }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    const { appStore } = this.props.store
-    const { islogin } = this.state;
     return (
       <View className="cart">
       {
         islogin ?
         <>
           {
-            appStore.cartInfo?.map((item, index)=> {
+            props?.store?.appStore?.cartInfo?.map((item, index)=> {
               return <View className='cart-row'>
               <View className='at-row at-row__align--center'>
                   <View className='at-col at-col-1'>
@@ -53,12 +33,14 @@ class Cart extends Component {
         :
         <View className="cart-login">
           <Text>您尚未登录</Text>
-          <AtButton type='primary' onClick={()=> this.setState({ islogin: true })}>登录</AtButton>
+          <AtButton type='primary' onClick={()=> setIslogin(true)}>登录</AtButton>
         </View>
       }
     </View>
     )
-  }
+
 }
 
-export default Cart
+
+
+export default inject('store')(observer(Cart))

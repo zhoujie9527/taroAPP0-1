@@ -19,4 +19,4 @@ useRouter不能直接传对象、数组
 直传需要进行JSON序列化
 
 4. 
-mobx-react还不能直接与react hooks使用，暂时使用传统的class组件实现mobx状态管理 
+mobx-react + react hooks实现状态管理 
