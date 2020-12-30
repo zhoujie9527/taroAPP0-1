@@ -106,9 +106,21 @@ function GoodsFooter(props) {
   function shopping() {
     console.log(props.data)
     console.log("store",props.store)
-    const { appStore } = props.store;
-    let list = appStore.cartInfo.concat(props.data);
-    appStore.updateCart(list);
+    let data = props.store.appStore.cartInfo;
+    let flag = true;
+    // let list = [];
+    data?.map((item, index)=> {
+      if(item?.id === props?.data?.id) {
+        data[index].sum += 1;
+        flag = false;
+      }
+    })
+    if(flag) {
+      let info = props.data;
+      info.sum = 1;
+      data = data.concat(info);
+    }
+    props.store.appStore.cartInfo = data;
     Taro.switchTab({
       url: `/pages/cart/index`
     })
