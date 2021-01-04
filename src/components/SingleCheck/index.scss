@@ -1,0 +1,10 @@
+.single_check {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &_img {
+        width: 40px;
+        height: 40px;
+        margin-left: 24px;
+    }
+}

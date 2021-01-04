@@ -15,7 +15,7 @@ export default function Post() {
 
   return (
     <View className="post">
-      <GoodsDetail data={params.data}/>
+      <GoodsDetail data={params?.data}/>
     </View>
   )
 }

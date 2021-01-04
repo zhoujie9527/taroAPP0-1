@@ -8,7 +8,9 @@ export default function GoodsDetail(props) {
   const [data, setData] = useState({})
 
   useEffect(()=>{
-    setData(JSON.parse(props.data));
+    if(props?.data) {
+      setData(JSON.parse(props?.data));
+    }
   },[])
 
   return (

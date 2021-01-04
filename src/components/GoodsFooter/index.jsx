@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import homeIcon from './assets/home.png'
@@ -108,7 +108,6 @@ function GoodsFooter(props) {
     console.log("store",props.store)
     let data = props.store.appStore.cartInfo;
     let flag = true;
-    // let list = [];
     data?.map((item, index)=> {
       if(item?.id === props?.data?.id) {
         data[index].sum += 1;
@@ -120,9 +119,21 @@ function GoodsFooter(props) {
       info.sum = 1;
       data = data.concat(info);
     }
+
+    let totolNum = 0;
+    data.map(item=> {
+      totolNum += item?.sum
+    })
     props.store.appStore.cartInfo = data;
+    props.store.appStore.cartInfo.totolNum = totolNum;
+    // 带上success解决切换页面不刷新问题
     Taro.switchTab({
-      url: `/pages/cart/index`
+      url: `/pages/cart/index`,
+      success: function (e) { 
+        let page = getCurrentPages().pop(); 
+        if (page == undefined || page == null) return; 
+        page.onLoad(); 
+        } 
     })
   }
 
